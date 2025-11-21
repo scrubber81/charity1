@@ -245,7 +245,49 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
   final List<String> tabs = ['Home', 'Events', 'Scan', 'Info', 'Donate'];
   late AnimationController _tabAnimationController;
   int _totalPoints = 0;
-  List<Map<String, dynamic>> _scanHistory = [];
+  final List<Map<String, dynamic>> _scanHistory = [];
+  
+  // Calendar state
+  DateTime _selectedDate = DateTime.now();
+  DateTime _focusedMonth = DateTime.now();
+  
+  // Fake events data
+  final Map<DateTime, List<Map<String, String>>> _events = {
+    DateTime(2025, 11, 21): [
+      {'title': 'Food Drive Kickoff', 'time': '9:00 AM', 'location': 'Community Center', 'type': 'Collection'},
+      {'title': 'Volunteer Orientation', 'time': '2:00 PM', 'location': 'Main Office', 'type': 'Training'},
+    ],
+    DateTime(2025, 11, 23): [
+      {'title': 'Weekend Clothing Drive', 'time': '10:00 AM', 'location': 'City Park', 'type': 'Collection'},
+    ],
+    DateTime(2025, 11, 25): [
+      {'title': 'Thanksgiving Meal Prep', 'time': '8:00 AM', 'location': 'Kitchen Facility', 'type': 'Volunteer'},
+      {'title': 'Community Dinner', 'time': '5:00 PM', 'location': 'Community Hall', 'type': 'Event'},
+    ],
+    DateTime(2025, 11, 27): [
+      {'title': 'Monthly Board Meeting', 'time': '6:00 PM', 'location': 'Conference Room', 'type': 'Meeting'},
+    ],
+    DateTime(2025, 11, 30): [
+      {'title': 'Youth Mentorship Program', 'time': '11:00 AM', 'location': 'Youth Center', 'type': 'Program'},
+      {'title': 'Fundraising Gala Planning', 'time': '3:00 PM', 'location': 'Main Office', 'type': 'Meeting'},
+    ],
+    DateTime(2025, 12, 5): [
+      {'title': 'Winter Coat Distribution', 'time': '9:00 AM', 'location': 'Distribution Center', 'type': 'Event'},
+    ],
+    DateTime(2025, 12, 10): [
+      {'title': 'Holiday Toy Drive', 'time': '10:00 AM', 'location': 'Shopping Mall', 'type': 'Collection'},
+      {'title': 'Gift Wrapping Workshop', 'time': '2:00 PM', 'location': 'Community Center', 'type': 'Workshop'},
+    ],
+    DateTime(2025, 12, 15): [
+      {'title': 'Annual Fundraising Gala', 'time': '7:00 PM', 'location': 'Grand Ballroom', 'type': 'Fundraiser'},
+    ],
+    DateTime(2025, 12, 20): [
+      {'title': 'Holiday Food Basket Prep', 'time': '8:00 AM', 'location': 'Warehouse', 'type': 'Volunteer'},
+    ],
+    DateTime(2025, 12, 24): [
+      {'title': 'Christmas Eve Service', 'time': '6:00 PM', 'location': 'Main Hall', 'type': 'Event'},
+    ],
+  };
 
   @override
   void initState() {
@@ -399,16 +441,111 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
           ),
           const SizedBox(height: 20),
           _buildIOSCard(
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Making a Difference',
+                  style: TextStyle(
+                    color: Colors.deepPurpleAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  'Our mission is to help communities in need. Join us in making the world a better place.',
+                  style: TextStyle(color: Colors.white, fontSize: 14, height: 1.5),
+                ),
+                SizedBox(height: 16),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          _buildIOSCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
+                  'Campaign Progress',
+                  style: TextStyle(
+                    color: Colors.deepPurpleAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: const LinearProgressIndicator(
+                    value: 0.75,
+                    backgroundColor: Colors.white12,
+                    valueColor: AlwaysStoppedAnimation(Colors.deepPurpleAccent),
+                    minHeight: 6,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  '75% of Goal Reached',
+                  style: TextStyle(color: Colors.white70, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          _buildIOSCard(
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Contact Information',
+                  style: TextStyle(
+                    color: Colors.deepPurpleAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
                   'Email: info@charity.org\nPhone: +1 (800) 123-4567',
                   style: TextStyle(color: Colors.white70, height: 1.8),
                 ),
               ],
             ),
           ),
+          const SizedBox(height: 24),
+          Text(
+            'Recent Updates',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const SizedBox(height: 12),
+          ...List.generate(3, (index) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: _buildIOSCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Update ${index + 1}',
+                      style: const TextStyle(
+                        color: Colors.deepPurpleAccent,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    const Text(
+                      'Great progress on our latest initiative. Thank you for your support!',
+                      style: TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
         ],
       ),
     );
@@ -452,10 +589,10 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
           }).toList(),
           const SizedBox(height: 24),
           _buildIOSCard(
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Why Donate?',
                   style: TextStyle(
                     color: Colors.deepPurpleAccent,
@@ -463,8 +600,8 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
+                SizedBox(height: 8),
+                Text(
                   '✓ 100% of funds go to those in need\n✓ Tax-deductible donations\n✓ Monthly impact reports\n✓ Secure transactions',
                   style: TextStyle(color: Colors.white, height: 1.8),
                 ),
@@ -525,132 +662,401 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
       ),
     );
   }
-}(
-                  'Making a Difference',
-                  style: TextStyle(
-                    color: Colors.deepPurpleAccent,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+
+  Widget _buildEventsTab() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Event Calendar',
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Our mission is to help communities in need. Join us in making the world a better place.',
-                  style: TextStyle(color: Colors.white, fontSize: 14, height: 1.5),
+          ),
+          const SizedBox(height: 20),
+          
+          // Calendar Card
+          _buildIOSCard(
+            child: Column(
+              children: [
+                // Month Navigation
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        setState(() {
+                          _focusedMonth = DateTime(_focusedMonth.year, _focusedMonth.month - 1);
+                        });
+                      },
+                      child: const Icon(CupertinoIcons.chevron_left, color: Colors.white, size: 24),
+                    ),
+                    Text(
+                      _getMonthYear(_focusedMonth),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        setState(() {
+                          _focusedMonth = DateTime(_focusedMonth.year, _focusedMonth.month + 1);
+                        });
+                      },
+                      child: const Icon(CupertinoIcons.chevron_right, color: Colors.white, size: 24),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 16),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: LinearProgressIndicator(
-                    value: 0.75,
-                    backgroundColor: Colors.white12,
-                    valueColor: const AlwaysStoppedAnimation(Colors.deepPurpleAccent),
-                    minHeight: 6,
-                  ),
+                
+                // Weekday Headers
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) {
+                    return SizedBox(
+                      width: 40,
+                      child: Text(
+                        day,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white60,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
-                const SizedBox(height: 8),
-                const Text(
-                  '75% of Goal Reached',
-                  style: TextStyle(color: Colors.white70, fontSize: 12),
-                ),
+                const SizedBox(height: 12),
+                
+                // Calendar Grid
+                _buildCalendarGrid(),
               ],
             ),
           ),
+          
           const SizedBox(height: 24),
+          
+          // Selected Date Events
           Text(
-            'Recent Updates',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            _isSameDay(_selectedDate, DateTime.now()) 
+                ? 'Today\'s Events' 
+                : 'Events on ${_formatDate(_selectedDate)}',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
           ),
           const SizedBox(height: 12),
-          ...List.generate(3, (index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: _buildIOSCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Update ${index + 1}',
-                      style: const TextStyle(
-                        color: Colors.deepPurpleAccent,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    const Text(
-                      'Great progress on our latest initiative. Thank you for your support!',
-                      style: TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
+          
+          // Events List for Selected Date
+          _buildEventsList(),
         ],
       ),
     );
   }
-
-  Widget _buildEventsTab() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-            child: Text(
-              'Upcoming Events',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+  
+  Widget _buildCalendarGrid() {
+    final firstDayOfMonth = DateTime(_focusedMonth.year, _focusedMonth.month, 1);
+    final lastDayOfMonth = DateTime(_focusedMonth.year, _focusedMonth.month + 1, 0);
+    final startingWeekday = firstDayOfMonth.weekday % 7;
+    final daysInMonth = lastDayOfMonth.day;
+    
+    List<Widget> dayWidgets = [];
+    
+    // Add empty spaces for days before month starts
+    for (int i = 0; i < startingWeekday; i++) {
+      dayWidgets.add(const SizedBox(width: 40, height: 40));
+    }
+    
+    // Add days of month
+    for (int day = 1; day <= daysInMonth; day++) {
+      final date = DateTime(_focusedMonth.year, _focusedMonth.month, day);
+      final hasEvents = _hasEventsOnDate(date);
+      final isSelected = _isSameDay(date, _selectedDate);
+      final isToday = _isSameDay(date, DateTime.now());
+      
+      dayWidgets.add(
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _selectedDate = date;
+            });
+          },
+          child: Container(
+            width: 40,
+            height: 40,
+            margin: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: isSelected 
+                  ? Colors.deepPurpleAccent 
+                  : isToday 
+                      ? Colors.deepPurpleAccent.withOpacity(0.3)
+                      : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: isToday && !isSelected
+                    ? Colors.deepPurpleAccent
+                    : Colors.transparent,
+                width: 2,
+              ),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Text(
+                  '$day',
+                  style: TextStyle(
+                    color: isSelected 
+                        ? Colors.white 
+                        : isToday
+                            ? Colors.white
+                            : Colors.white70,
+                    fontWeight: isSelected || isToday ? FontWeight.bold : FontWeight.normal,
+                    fontSize: 14,
                   ),
+                ),
+                if (hasEvents)
+                  Positioned(
+                    bottom: 4,
+                    child: Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: isSelected ? Colors.white : Colors.amber,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
-          ...List.generate(4, (index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: _buildIOSCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      );
+    }
+    
+    return Wrap(
+      spacing: 0,
+      runSpacing: 0,
+      children: dayWidgets,
+    );
+  }
+  
+  Widget _buildEventsList() {
+    final eventsForDay = _getEventsForDate(_selectedDate);
+    
+    if (eventsForDay.isEmpty) {
+      return _buildIOSCard(
+        child: const Center(
+          child: Padding(
+            padding: EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                Icon(
+                  CupertinoIcons.calendar_badge_minus,
+                  color: Colors.white30,
+                  size: 48,
+                ),
+                SizedBox(height: 12),
+                Text(
+                  'No events scheduled',
+                  style: TextStyle(
+                    color: Colors.white60,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    
+    return Column(
+      children: eventsForDay.map((event) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: _buildIOSCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        const Icon(CupertinoIcons.calendar, color: Colors.deepPurpleAccent, size: 20),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Event ${index + 1}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: _getEventColor(event['type']!).withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        event['type']!,
+                        style: TextStyle(
+                          color: _getEventColor(event['type']!),
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
+                      ),
                     ),
-                    const SizedBox(height: 12),
+                    const Spacer(),
+                    const Icon(
+                      CupertinoIcons.time,
+                      color: Colors.white60,
+                      size: 16,
+                    ),
+                    const SizedBox(width: 4),
                     Text(
-                      'Date: ${DateTime.now().add(Duration(days: index * 7)).toString().split(' ')[0]}',
-                      style: const TextStyle(color: Colors.white70, fontSize: 13),
+                      event['time']!,
+                      style: const TextStyle(
+                        color: Colors.white60,
+                        fontSize: 13,
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Join us for an amazing charity event and help make a difference!',
-                      style: TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
-                    ),
-                    const SizedBox(height: 12),
-                    _buildIOSButton('Learn More', () {}),
                   ],
                 ),
-              ),
-            );
-          }),
-          const SizedBox(height: 16),
-        ],
-      ),
+                const SizedBox(height: 12),
+                Text(
+                  event['title']!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Icon(
+                      CupertinoIcons.location_solid,
+                      color: Colors.white60,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      event['location']!,
+                      style: const TextStyle(
+                        color: Colors.white60,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildIOSButton('Register', () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Registered for ${event['title']}!'),
+                            backgroundColor: Colors.green,
+                            behavior: SnackBarBehavior.floating,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                    const SizedBox(width: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.deepPurpleAccent, width: 2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: CupertinoButton(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('More info about ${event['title']}'),
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Details',
+                          style: TextStyle(
+                            color: Colors.deepPurpleAccent,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
     );
+  }
+  
+  bool _hasEventsOnDate(DateTime date) {
+    return _events.keys.any((eventDate) => _isSameDay(eventDate, date));
+  }
+  
+  List<Map<String, String>> _getEventsForDate(DateTime date) {
+    final dateKey = _events.keys.firstWhere(
+      (key) => _isSameDay(key, date),
+      orElse: () => DateTime(1900),
+    );
+    return _events[dateKey] ?? [];
+  }
+  
+  bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year && 
+           date1.month == date2.month && 
+           date1.day == date2.day;
+  }
+  
+  String _getMonthYear(DateTime date) {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return '${months[date.month - 1]} ${date.year}';
+  }
+  
+  String _formatDate(DateTime date) {
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    return '${months[date.month - 1]} ${date.day}, ${date.year}';
+  }
+  
+  Color _getEventColor(String type) {
+    switch (type) {
+      case 'Collection':
+        return Colors.blue;
+      case 'Training':
+        return Colors.orange;
+      case 'Volunteer':
+        return Colors.green;
+      case 'Event':
+        return Colors.purple;
+      case 'Meeting':
+        return Colors.red;
+      case 'Program':
+        return Colors.teal;
+      case 'Workshop':
+        return Colors.pink;
+      case 'Fundraiser':
+        return Colors.amber;
+      default:
+        return Colors.deepPurpleAccent;
+    }
   }
 
   Widget _buildScanTab() {
@@ -1028,10 +1434,10 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
           ),
           const SizedBox(height: 16),
           _buildIOSCard(
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Our Mission',
                   style: TextStyle(
                     color: Colors.deepPurpleAccent,
@@ -1039,13 +1445,13 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
+                SizedBox(height: 8),
+                Text(
                   'We are dedicated to creating positive change in communities worldwide.',
                   style: TextStyle(color: Colors.white, height: 1.5),
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16),
+                Text(
                   'Our Impact',
                   style: TextStyle(
                     color: Colors.deepPurpleAccent,
@@ -1053,13 +1459,13 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
+                SizedBox(height: 8),
+                Text(
                   '• 50,000+ Lives Impacted\n• 200+ Projects Completed\n• 100+ Countries Reached',
                   style: TextStyle(color: Colors.white, height: 1.8),
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16),
+                Text(
                   'Get In Touch',
                   style: TextStyle(
                     color: Colors.deepPurpleAccent,
@@ -1067,5 +1473,16 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text
+                SizedBox(height: 8),
+                Text(
+                  'Email: info@charity.org\nPhone: +1 (800) 123-4567\nWebsite: www.charity.org',
+                  style: TextStyle(color: Colors.white, height: 1.8),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -1,4 +1,6 @@
-# charity1
+# Scottish Week Charity Application
 
-Sccotish week application 
+Made / Moddified Using Claude Sonnet 4.5
+
+
 
