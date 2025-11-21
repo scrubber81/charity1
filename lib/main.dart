@@ -33,7 +33,7 @@ class OnboardingPage1 extends StatelessWidget {
         pages: [
           OnboardingPageModel(
             title: 'Make a Real Impact',
-            description: 'Your donations directly help communities in need around the world.',
+            description: 'Your donations directly help the peterhead and local communities',
             imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
             bgColor: Colors.indigo,
           ),
@@ -45,12 +45,12 @@ class OnboardingPage1 extends StatelessWidget {
           ),
           OnboardingPageModel(
             title: 'Track Your Impact',
-            description: 'See exactly how your contributions are transforming lives.',
+            description: 'See exactly how your contributions are transforming lives in Scotland.',
             imageUrl: 'https://i.ibb.co/420D7VP/building.png',
             bgColor: const Color(0xfffeae4f),
           ),
           OnboardingPageModel(
-            title: 'Together We Rise',
+            title: 'Helping Together',
             description: 'Every donation matters. Join us in building a better tomorrow.',
             imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
             bgColor: Colors.purple,
