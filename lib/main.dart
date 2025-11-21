@@ -454,7 +454,7 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                 ),
                 SizedBox(height: 12),
                 Text(
-                  'Our mission is to help communities in need. Join us in making the world a better place.',
+                  'Our mission is to help the local community',
                   style: TextStyle(color: Colors.white, fontSize: 14, height: 1.5),
                 ),
                 SizedBox(height: 16),
@@ -507,7 +507,7 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Email: info@charity.org\nPhone: +1 (800) 123-4567',
+                  'Email: info@charity.org\nPhone: +44 7762 277 440',
                   style: TextStyle(color: Colors.white70, height: 1.8),
                 ),
               ],
@@ -1447,7 +1447,7 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'We are dedicated to creating positive change in communities worldwide.',
+                  'We are dedicated to creating positive change in local communities.',
                   style: TextStyle(color: Colors.white, height: 1.5),
                 ),
                 SizedBox(height: 16),
@@ -1461,7 +1461,7 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                 ),
                 SizedBox(height: 8),
                 Text(
-                  '• 50,000+ Lives Impacted\n• 200+ Projects Completed\n• 100+ Countries Reached',
+                  '• 50,000+ Lives Impacted\n• 200+ Projects Completed\n• 100+ Charity Events Ran',
                   style: TextStyle(color: Colors.white, height: 1.8),
                 ),
                 SizedBox(height: 16),
@@ -1475,7 +1475,7 @@ class _CharityHomePageState extends State<CharityHomePage> with TickerProviderSt
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Email: info@charity.org\nPhone: +1 (800) 123-4567\nWebsite: www.charity.org',
+                  'Email: example@gmail.com\nPhone: +44 Example \nWebsite: www.example.co.uk',
                   style: TextStyle(color: Colors.white, height: 1.8),
                 ),
               ],
