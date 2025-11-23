@@ -69,6 +69,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Charity App',
       theme: AppTheme.lightTheme,
+      debugShowCheckedModeBanner: false,
       home: _showOnboarding ? const OnboardingPage() : const CharityHomePage(),
     );
   }
