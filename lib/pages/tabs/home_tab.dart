@@ -28,7 +28,7 @@ class HomeTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Making a Difference',
+                  'Making a Difference Across the UK',
                   style: TextStyle(
                     color: AppTheme.primaryPurple,
                     fontWeight: FontWeight.bold,
@@ -37,7 +37,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 SizedBox(height: AppTheme.spacing12),
                 Text(
-                  'Our mission is to help the local community',
+                  'We work with vulnerable communities across England, Scotland, Wales, and Northern Ireland. Together we\'re breaking the cycle of poverty and supporting those in need.',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -110,6 +110,20 @@ class HomeTab extends StatelessWidget {
           ),
           const SizedBox(height: AppTheme.spacing12),
           ...List.generate(3, (index) {
+            final updates = [
+              {
+                'title': 'Movember Campaign',
+                'description': 'Join our November campaign supporting men\'s health and mental wellbeing. Every donation helps.',
+              },
+              {
+                'title': 'Winter Appeal',
+                'description': 'Help us provide warmth and shelter to homeless communities during the cold months ahead.',
+              },
+              {
+                'title': 'Community Support',
+                'description': 'Our food banks and community centres are serving record numbers. Your support is vital.',
+              },
+            ];
             return Padding(
               padding: const EdgeInsets.only(bottom: AppTheme.spacing12),
               child: IOSCard(
@@ -117,16 +131,16 @@ class HomeTab extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Update ${index + 1}',
+                      updates[index]['title']!,
                       style: const TextStyle(
                         color: AppTheme.primaryPurple,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: AppTheme.spacing8),
-                    const Text(
-                      'Great progress on our latest initiative. Thank you for your support!',
-                      style: TextStyle(
+                    Text(
+                      updates[index]['description']!,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
                         height: 1.4,

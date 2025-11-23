@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:charity1/theme/app_theme.dart';
 import 'package:charity1/widgets/ios_card.dart';
 import 'package:charity1/utils/date_utils.dart' as date_utils;
+import 'package:charity1/pages/incident_report_form.dart';
+import 'package:charity1/pages/incident_history_page.dart';
 
 class EventsTab extends StatefulWidget {
   const EventsTab({super.key});
@@ -27,16 +29,43 @@ class _EventsTabState extends State<EventsTab> {
   }
 
   final Map<DateTime, List<Map<String, String>>> _events = {
-    DateTime(2025, 11, 21): [
-      {'title': 'Food Drive Kickoff', 'time': '9:00 AM', 'location': 'Community Center', 'type': 'Collection'},
-      {'title': 'Volunteer Orientation', 'time': '2:00 PM', 'location': 'Main Office', 'type': 'Training'},
+    DateTime(2025, 11, 1): [
+      {'title': 'Movember Campaign Launch', 'time': '10:00 AM', 'location': 'Aberdeen City Centre', 'type': 'Event'},
+      {'title': 'Men\'s Mental Health Workshop', 'time': '2:00 PM', 'location': 'Peterhead Community Centre', 'type': 'Training'},
     ],
-    DateTime(2025, 11, 23): [
-      {'title': 'Weekend Clothing Drive', 'time': '10:00 AM', 'location': 'City Park', 'type': 'Collection'},
+    DateTime(2025, 11, 3): [
+      {'title': 'Food Bank Volunteer Day', 'time': '9:00 AM', 'location': 'Aberdeen Food Bank, George Street', 'type': 'Volunteer'},
+    ],
+    DateTime(2025, 11, 5): [
+      {'title': 'Homelessness Awareness Forum', 'time': '6:00 PM', 'location': 'Aberdeen Town House', 'type': 'Meeting'},
+    ],
+    DateTime(2025, 11, 8): [
+      {'title': 'Winter Coat Collection', 'time': '10:00 AM', 'location': 'Peterhead High Street', 'type': 'Collection'},
+      {'title': 'Donation Drive', 'time': '2:00 PM', 'location': 'Aberdeen Shopping Centre', 'type': 'Fundraiser'},
+    ],
+    DateTime(2025, 11, 11): [
+      {'title': 'Remembrance Day Service', 'time': '11:00 AM', 'location': 'Aberdeen War Memorial', 'type': 'Event'},
+    ],
+    DateTime(2025, 11, 15): [
+      {'title': 'Anti-Trafficking Awareness Day', 'time': '1:00 PM', 'location': 'Peterhead Police Station', 'type': 'Training'},
+      {'title': 'Support Meeting', 'time': '5:00 PM', 'location': 'Aberdeen Community Hall', 'type': 'Meeting'},
+    ],
+    DateTime(2025, 11, 18): [
+      {'title': 'Grocery Voucher Distribution', 'time': '9:00 AM', 'location': 'Peterhead Social Centre', 'type': 'Collection'},
+    ],
+    DateTime(2025, 11, 22): [
+      {'title': 'Winter Appeal Kickoff', 'time': '10:00 AM', 'location': 'Aberdeen Main Office', 'type': 'Event'},
+      {'title': 'Emergency Shelter Prep', 'time': '3:00 PM', 'location': 'Peterhead Distribution Warehouse', 'type': 'Volunteer'},
     ],
     DateTime(2025, 11, 25): [
-      {'title': 'Thanksgiving Meal Prep', 'time': '8:00 AM', 'location': 'Kitchen Facility', 'type': 'Volunteer'},
-      {'title': 'Community Dinner', 'time': '5:00 PM', 'location': 'Community Hall', 'type': 'Event'},
+      {'title': 'Community Thanksgiving', 'time': '5:00 PM', 'location': 'Aberdeen Community Kitchen', 'type': 'Event'},
+    ],
+    DateTime(2025, 11, 28): [
+      {'title': 'Holiday Package Assembly', 'time': '10:00 AM', 'location': 'Peterhead Distribution Centre', 'type': 'Volunteer'},
+      {'title': 'Small Business Charity Partner Meeting', 'time': '2:00 PM', 'location': 'Aberdeen Business Hub', 'type': 'Meeting'},
+    ],
+    DateTime(2025, 11, 30): [
+      {'title': 'Movember Final Fundraiser', 'time': '7:00 PM', 'location': 'Peterhead Local Pub', 'type': 'Fundraiser'},
     ],
   };
 
@@ -50,12 +79,48 @@ class _EventsTabState extends State<EventsTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Event Calendar',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+          // Header with title and incident history button
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Event Calendar',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.red.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
+                  border: Border.all(color: Colors.red.withOpacity(0.5)),
                 ),
+                child: CupertinoButton(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppTheme.spacing12,
+                    vertical: 6.0,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const IncidentHistoryPage()),
+                    );
+                  },
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(CupertinoIcons.flag_fill, color: Colors.red, size: 16),
+                      SizedBox(width: 6),
+                      Text(
+                        'Reports',
+                        style: TextStyle(color: Colors.red, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: AppTheme.spacing20),
           _buildCalendarCard(),
@@ -312,6 +377,29 @@ class _EventsTabState extends State<EventsTab> {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: AppTheme.spacing12),
+        // Incident Report Button
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => IncidentReportForm(eventTitle: event['title']!),
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red.withOpacity(0.2),
+              foregroundColor: Colors.red,
+              side: BorderSide(color: Colors.red.withOpacity(0.5)),
+              padding: const EdgeInsets.symmetric(vertical: 10),
+            ),
+            icon: const Icon(CupertinoIcons.flag_fill, size: 16),
+            label: const Text('Report Incident'),
+          ),
         ),
       ],
     );

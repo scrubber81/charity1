@@ -38,7 +38,7 @@ class InfoTab extends StatelessWidget {
                 ),
                 const SizedBox(height: AppTheme.spacing8),
                 const Text(
-                  'We are dedicated to creating positive change in local communities.',
+                  'We are dedicated to supporting vulnerable communities across the United Kingdom. Through partnerships with local organisations, we tackle homelessness, food poverty, mental health crises, and social isolation.',
                   style: TextStyle(color: Colors.white, height: 1.5),
                 ),
                 const SizedBox(height: AppTheme.spacing16),

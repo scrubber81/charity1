@@ -1,40 +1,40 @@
 class AppConstants {
   // Contact Information
-  static const String charityEmail = 'info@charity.org';
-  static const String charityPhone = '+44 7762 277 440';
-  static const String charityPhoneDisplay = '+44 7762 277 440';
-  static const String charityWebsite = 'www.charity.org';
+  static const String charityEmail = 'support@aberdeencharity.org.uk';
+  static const String charityPhone = '+44 1224 640000';
+  static const String charityPhoneDisplay = '+44 1224 640000';
+  static const String charityWebsite = 'www.aberdeencharity.org.uk';
 
   // Strings
-  static const String appTitle = 'Charity App';
-  static const String charityMission = 'Your donations directly help the peterhead and local communities';
+  static const String appTitle = 'UK Charity';
+  static const String charityMission = 'Supporting vulnerable communities across the United Kingdom';
   
   // Impact Stats
-  static const int livesImpacted = 50000;
-  static const int projectsCompleted = 200;
-  static const int charityEventsRan = 100;
+  static const int livesImpacted = 120000;
+  static const int projectsCompleted = 450;
+  static const int charityEventsRan = 280;
 
   // Campaign Progress
-  static const double campaignProgress = 0.75;
-  static const String campaignProgressText = '75% of Goal Reached';
+  static const double campaignProgress = 0.82;
+  static const String campaignProgressText = '82% of Goal Reached';
 
   // Onboarding Screen Titles & Descriptions
   static const List<Map<String, String>> onboardingPages = [
     {
       'title': 'Make a Real Impact',
-      'description': 'Your donations directly help the peterhead and local communities',
+      'description': 'Your donations directly help vulnerable communities across the UK',
     },
     {
       'title': 'Join Our Community',
-      'description': 'Connect with thousands of changemakers and supporters like you.',
+      'description': 'Connect with thousands of changemakers supporting British charities.',
     },
     {
       'title': 'Track Your Impact',
-      'description': 'See exactly how your contributions are transforming lives in Scotland.',
+      'description': 'See exactly how your contributions are transforming lives nationwide.',
     },
     {
       'title': 'Helping Together',
-      'description': 'Every donation matters. Join us in building a better tomorrow.',
+      'description': 'Every donation matters. Join us in building a better Britain.',
     },
   ];
 
