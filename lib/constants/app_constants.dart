@@ -1,12 +1,12 @@
 class AppConstants {
   // Contact Information
-  static const String charityEmail = 'support@aberdeencharity.org.uk';
+  static const String charityEmail = 'support@aberdeenscottishweek.org.uk';
   static const String charityPhone = '+44 1224 640000';
   static const String charityPhoneDisplay = '+44 1224 640000';
-  static const String charityWebsite = 'www.aberdeencharity.org.uk';
+  static const String charityWebsite = 'http://www.peterheadscottishweek.org';
 
   // Strings
-  static const String appTitle = 'UK Charity';
+  static const String appTitle = 'Peterhead Scottish Week';
   static const String charityMission = 'Supporting vulnerable communities across the United Kingdom';
   
   // Impact Stats
@@ -22,19 +22,19 @@ class AppConstants {
   static const List<Map<String, String>> onboardingPages = [
     {
       'title': 'Make a Real Impact',
-      'description': 'Your donations directly help vulnerable communities across the UK',
+      'description': 'Your donations directly help vulnerable communities across the Scotland',
     },
     {
       'title': 'Join Our Community',
-      'description': 'Connect with thousands of changemakers supporting British charities.',
+      'description': 'Connect with thousands of changemakers supporting Scottish charities.',
     },
     {
       'title': 'Track Your Impact',
-      'description': 'See exactly how your contributions are transforming lives nationwide.',
+      'description': 'See exactly how your contributions are transforming lives across Scotland.',
     },
     {
       'title': 'Helping Together',
-      'description': 'Every donation matters. Join us in building a better Britain.',
+      'description': 'Every donation matters. Join us in building a better Scotland.',
     },
   ];
 
